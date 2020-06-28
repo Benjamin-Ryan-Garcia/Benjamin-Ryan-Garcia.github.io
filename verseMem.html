@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<title>VerseMem</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #607d8b;
+  color: white;
+  padding-bottom: 20px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  margin-left: 160px;
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+</style>
+<body class="w3-light-grey">
+
+<header class="w3-container w3-blue-grey w3-center">
+  <p></p>
+  <div class="w3-third">
+    <i><a style="text-decoration:none" href="home.html">Home</a></i>
+  </div>
+  <div class="w3-third">
+    <div class = "dropdown">
+	<i>Projects</i>
+	<button class="fa fa-angle-down fa-fw dropbtn"></button>
+    	<div class="dropdown-content">
+     	 <a class="w3-center" href="verseMem.html">VerseMem</a>
+    	</div>
+    </div>
+  </div>
+  <div class="w3-third">
+    <i><a style="text-decoration:none" href="meditations.html">Meditations</a></i>
+    <p></p>
+    <p></p>
+  </div>
+</header>
+
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+
+
+    <!-- Left Column -->
+    <div class="w3-third">
+
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>Old Testament</b></p>
+          <p>Psalms</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:20%">20%</div>
+          </div>
+          <p>Isaiah</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:5%">5%</div>
+          </div>
+          <hr>
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>New Testament</b></p>
+          <p>Phillipians</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:50%">50%</div>
+          </div>
+          <p>1 Peter</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:100%">100%</div>
+          </div>
+          <br>
+          <br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey"></i>Psalm 27</h2>
+	  <div class="w3-container">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	  <p id="verse2"></p>
+	  </div>
+      </div>
+    <!-- End Right Column -->
+    </div>
+
+  <!-- End Grid -->
+  </div>
+
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-blue-grey w3-center w3-margin-top">
+  <p>Find me on social media.</p>
+  <a href="https://www.facebook.com/ben.garcia.7/"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+  <a href="https://www.instagram.com/benryangarcia/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+  <a href="https://linkedin.com"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+  <a href="https://github.com"><i class="fa fa-github w3-hover-opacity"></i></a>
+  <p></p>
+</footer>
+
+<script>
+    var wordCount = 0;
+    var wordIndex = 0;
+    var verseIndex = 0;
+    var passage = "The LORD is my light and my salvation; whom shall I fear? The LORD is the strength of my life. Of whom shall I be afraid?\
+    When the wicked, even my enemies and my foes, came upon me to eat up my flesh, they stumbled and fell.\
+    Though an host should encamp against me, my heart shall not fear. Though war should rise against me, in this will I be confident.";
+    var verses = passage.split("\
+    ");
+    var words = verses.map(function(verse) {
+        return verse.split(" ");
+    });
+
+    var verseNum = 1;
+    var elements = words.map(function(verse){
+        var temp = verse.map(function(word){
+            return $('<span id="' + word + '">' + word + ' ' + '</span>');
+        });
+        temp[0] = $('<span id="' + verse[0] + '">' + verseNum + ') ' + verse[0] + ' ' + '</span>'); //adds verse number to start of line
+        temp[temp.length - 1] = $('<span id="' + verse[verse.length - 1] + '">' + verse[verse.length - 1] + '<br><br>' + '</span>'); //adds a newline after each verse
+        verseNum++;
+        return temp;
+    });
+
+    var pointerElement = $('#verse2');
+    document.addEventListener('keydown', function(event) {
+    	var key = String.fromCharCode(event.keyCode).toLowerCase();
+
+        if(key == words[verseIndex][wordIndex].charAt(0).toLowerCase()){
+            pointerElement.append(elements[verseIndex][wordIndex]);
+            elements[verseIndex][wordIndex].hide();
+            elements[verseIndex][wordIndex].fadeIn(300);
+            wordIndex++;
+            wordCount++;
+            if(wordIndex >= words[verseIndex].length){ verseIndex++; wordIndex = 0; }
+        }
+    });
+</script>
+</body>
+</html>
