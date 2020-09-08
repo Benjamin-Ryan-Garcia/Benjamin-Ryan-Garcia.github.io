@@ -181,6 +181,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             wordCount++;
             if(wordIndex >= words[verseIndex].length){ verseIndex++; wordIndex = 0; }
         }
+	else{
+            tempEl = $('<span style="color: red;">' + 'incorrect' + ' ' + '</span>');
+            pointerElement.append(tempEl);
+            tempEl.fadeOut(300);
+        }
     });
 </script>
 </body>
