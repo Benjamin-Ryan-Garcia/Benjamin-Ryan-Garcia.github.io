@@ -183,9 +183,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             if(wordIndex >= words[verseIndex].length){ verseIndex++; wordIndex = 0; }
         }
 	else{
+	    incorrectEl.remove();
             pointerElement.append(incorrectEl);
             incorrectEl.fadeOut(300);
-	    incorrectEl.remove();
         }
     });
 </script>
