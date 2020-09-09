@@ -185,7 +185,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	else{
             pointerElement.append(incorrectEl);
             incorrectEl.fadeOut(300);
-	    incorrectEl = $('<span style="color: red;">' + 'incorrect' + ' ' + '</span>');
+	    incorrectEl.remove();
         }
     });
 </script>
