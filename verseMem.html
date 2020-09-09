@@ -170,7 +170,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     });
 
     var pointerElement = $('#verse2');
-    incorrectEl = $('<span style="color: red;">' + 'incorrect' + ' ' + '</span>');
+    
     document.addEventListener('keydown', function(event) {
     	var key = String.fromCharCode(event.keyCode).toLowerCase();
 
@@ -183,8 +183,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             if(wordIndex >= words[verseIndex].length){ verseIndex++; wordIndex = 0; }
         }
 	else{
-	    incorrectEl.remove();
-	    incorrectEl.css('opacity') = '1.0';
+	    incorrectEl = $('<span style="color: red;">' + 'incorrect' + ' ' + '</span>');
             pointerElement.append(incorrectEl);
             incorrectEl.fadeOut(300);
         }
