@@ -160,12 +160,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         } else {
             xhr = null;
         }
-	xhr.setRequestHeader("Origin", "https://benjamin-ryan-garcia.github.io/verseMem.html");
         xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
         return xhr;
     }
 
-    var request = createCORSRequest("get", "https://en.wikisource.org/wiki/Bible_(King_James)/Psalms");
+    var request = createCORSRequest("get", "https://en.wikisource.org/wiki/Bible_(King_James)/Psalms?origin=*");
     if (request){
         request.onload = function(){
             console.log(request.responseText);
