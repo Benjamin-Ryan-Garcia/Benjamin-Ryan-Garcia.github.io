@@ -164,7 +164,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         return xhr;
     }
 
-    var request = createCORSRequest("get", "https://en.wikisource.org/wiki/Bible_(King_James)/Psalms?origin=https://benjamin-ryan-garcia.github.io/verseMem.html");
+    var request = createCORSRequest("get", "https://en.wikisource.org/wiki/Bible_(King_James)/Psalms?origin=");
     if (request){
         request.onload = function(){
             console.log(request.responseText);
