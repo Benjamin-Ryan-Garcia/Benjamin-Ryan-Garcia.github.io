@@ -150,9 +150,26 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </footer>
 
 <script>
-    $(document).ready(function(){
-        $('#result').load("https://en.wikisource.org/wiki/Bible_(King_James)/Psalms#27:1");
-    });
+    function createCORSRequest(method, url){
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr){
+            xhr.open(method, url, true);
+        } else if (typeof XDomainRequest != "undefined"){
+            xhr = new XDomainRequest();
+            xhr.open(method, url);
+        } else {
+            xhr = null;
+        }
+        return xhr;
+    }
+
+    var request = createCORSRequest("get", "https://humanwhocodes.com/");
+    if (request){
+        request.onload = function(){
+            console.log(request.responseText);
+        };
+        request.send();
+    }
 </script>	
 	
 <script>
