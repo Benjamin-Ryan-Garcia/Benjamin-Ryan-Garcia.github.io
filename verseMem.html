@@ -9,6 +9,8 @@
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
+
+
 /* Dropdown Button */
 .dropbtn {
   background-color: #607d8b;
@@ -25,7 +27,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  margin-left: 160px;
+  margin-left: 10%;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -49,28 +51,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 .dropdown:hover .dropdown-content {display: block;}
 
 </style>
-<body class="w3-light-grey">
 
-<header class="w3-container w3-blue-grey w3-center">
-  <p></p>
-  <div class="w3-third">
-    <i><a style="text-decoration:none" href="index.html">Home</a></i>
-  </div>
-  <div class="w3-third">
-    <div class = "dropdown">
-	<i>Projects</i>
-	<button class="fa fa-angle-down fa-fw dropbtn"></button>
-    	<div class="dropdown-content">
-     	 <a class="w3-center" href="verseMem.html">VerseMem</a>
-    	</div>
-    </div>
-  </div>
-  <div class="w3-third">
-    <i><a style="text-decoration:none" href="meditations.html">Meditations</a></i>
-    <p></p>
-    <p></p>
-  </div>
-</header>
+<body class="w3-light-grey">
 
 
 <!-- Page Container -->
@@ -78,41 +60,169 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
   <!-- The Grid -->
   <div class="w3-row-padding">
-
-    <div class="w3-white w3-text-grey w3-card-4">
+      <div id="help" class="w3-white w3-text-grey w3-card-4">
         <div class="w3-container">
-          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>Project Description</b></p>
-          <p>This is a program that helps with memorizing scripture. To use it, just start typing the first letter of each word in the given passage. For example, with Psalm 27, the correct keystoke sequence begins with "tliml" (corresponding to "The Lord is my light").</p><br>
-	  <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>To-Do</b></p>
-	  <p>-Create passage selection menu<br>-Indicate incorrect keystroke<br>-Give a percentage for how well user did after completing passage</p><br>
-	</div>
-    </div>
-    <br><br>
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>VerseMem</b></p>
+          <p>This is a program that helps with memorizing scripture. To use it, select a passage, hit memorize, then just start typing the first letter of each word in the given passage. For example, with Psalm 27, the correct keystroke sequence begins with 't', 'l', 'i', 'm', 'l' (corresponding to "The LORD is my light").</p><br>
+        </div>
+      </div>
+    <br>
     <!-- Left Column -->
     <div class="w3-third">
-
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-container">
-          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>Old Testament</b></p>
-          <p>Psalms</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:20%">20%</div>
-          </div>
-          <p>Isaiah</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:5%">5%</div>
-          </div>
-          <hr>
+          <h3 class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>Passage Selection</b></h3>
+            <div class="w3-half">
+                <p><b>Old Testament</b></p>
+                <input type="radio" id="Genesis" name="book" value="Genesis">
+                <label for="Genesis">Genesis</label><br>
+                <input type="radio" id="Exodus" name="book" value="Exodus">
+                <label for="Exodus">Exodus</label><br>
+                <input type="radio" id="Leviticus" name="book" value="Leviticus">
+                <label for="Leviticus">Leviticus</label><br>
+                <input type="radio" id="Numbers" name="book" value="Numbers">
+                <label for="Numbers">Numbers</label><br>
+                <input type="radio" id="Deuteronomy" name="book" value="Deuteronomy">
+                <label for="Deuteronomy">Deuteronomy</label><br>
+                <input type="radio" id="Joshua" name="book" value="Joshua">
+                <label for="Joshua">Joshua</label><br>
+                <input type="radio" id="Judges" name="book" value="Judges">
+                <label for="Judges">Judges</label><br>
+                <input type="radio" id="Ruth" name="book" value="Ruth">
+                <label for="Ruth">Ruth</label><br>
+                <input type="radio" id="1_Samuel" name="book" value="1_Samuel">
+                <label for="1_Samuel">1 Samuel</label><br>
+                <input type="radio" id="2_Samuel" name="book" value="2_Samuel">
+                <label for="2_Samuel">2 Samuel</label><br>
+                <input type="radio" id="1_Kings" name="book" value="1_Kings">
+                <label for="1_Kings">1 Kings</label><br>
+                <input type="radio" id="2_Kings" name="book" value="2_Kings">
+                <label for="2_Kings">2 Kings</label><br>
+                <input type="radio" id="1_Chronicles" name="book" value="1_Chronicles">
+                <label for="1_Chronicles">1 Chronicles</label><br>
+                <input type="radio" id="2_Chronicles" name="book" value="2_Chronicles">
+                <label for="2_Chronicles">2 Chronicles</label><br>
+                <input type="radio" id="Ezra" name="book" value="Ezra">
+                <label for="Ezra">Ezra</label><br>
+                <input type="radio" id="Nehemiah" name="book" value="Nehemiah">
+                <label for="Nehemiah">Nehemiah</label><br>
+                <input type="radio" id="Esther" name="book" value="Esther">
+                <label for="Esther">Esther</label><br>
+                <input type="radio" id="Job" name="book" value="Job">
+                <label for="Job">Job</label><br>
+                <input type="radio" id="Psalms" name="book" value="Psalms">
+                <label for="psalms">Psalms</label><br>
+                <input type="radio" id="Proverbs" name="book" value="Proverbs">
+                <label for="Proverbs">Proverbs</label><br>
+                <input type="radio" id="Ecclesiastes" name="book" value="Ecclesiastes">
+                <label for="Ecclesiastes">Ecclesiastes</label><br>
+                <input type="radio" id="Song_Of_Solomon" name="book" value="Song_Of_Solomon">
+                <label for="Song_Of_Solomon">Song Of Solomon</label><br>
+                <input type="radio" id="Isaiah" name="book" value="Isaiah">
+                <label for="isaiah">Isaiah</label><br>
+                <input type="radio" id="Jeremiah" name="book" value="Jeremiah">
+                <label for="Jeremiah">Jeremiah</label><br>
+                <input type="radio" id="Lamentations" name="book" value="Lamentations">
+                <label for="Lamentations">Lamentations</label><br>
+                <input type="radio" id="Ezekiel" name="book" value="Ezekiel">
+                <label for="Ezekiel">Ezekiel</label><br>
+                <input type="radio" id="Daniel" name="book" value="Daniel">
+                <label for="Daniel">Daniel</label><br>
+                <input type="radio" id="Hosea" name="book" value="Hosea">
+                <label for="Hosea">Hosea</label><br>
+                <input type="radio" id="Joel" name="book" value="Joel">
+                <label for="Joel">Joel</label><br>
+                <input type="radio" id="Amos" name="book" value="Amos">
+                <label for="Amos">Amos</label><br>
+                <input type="radio" id="Obadiah" name="book" value="Obadiah">
+                <label for="Obadiah">Obadiah</label><br>
+                <input type="radio" id="Jonah" name="book" value="Jonah">
+                <label for="Jonah">Jonah</label><br>
+                <input type="radio" id="Micah" name="book" value="Micah">
+                <label for="Micah">Micah</label><br>
+                <input type="radio" id="Nahum" name="book" value="Nahum">
+                <label for="Nahum">Nahum</label><br>
+                <input type="radio" id="Habakkuk" name="book" value="Habakkuk">
+                <label for="Habakkuk">Habakkuk</label><br>
+                <input type="radio" id="Zephaniah" name="book" value="Zephaniah">
+                <label for="Zephaniah">Zephaniah</label><br>
+                <input type="radio" id="Haggai" name="book" value="Haggai">
+                <label for="Haggai">Haggai</label><br>
+                <input type="radio" id="Zechariah" name="book" value="Zechariah">
+                <label for="Zechariah">Zechariah</label><br>
+                <input type="radio" id="Malachi" name="book" value="Malachi">
+                <label for="Malachi">Malachi</label><br><br>
+            </div>
+            <div class="w3-half">
+                <p><b>New Testament</b></p>
+                <input type="radio" id="Matthew" name="book" value="Matthew">
+                <label for="Matthew">Matthew</label><br>
+                <input type="radio" id="Mark" name="book" value="Mark">
+                <label for="Mark">Mark</label><br>
+                <input type="radio" id="Luke" name="book" value="Luke">
+                <label for="Luke">Luke</label><br>
+                <input type="radio" id="John" name="book" value="John">
+                <label for="John">John</label><br>
+                <input type="radio" id="Acts" name="book" value="Acts">
+                <label for="Acts">Acts</label><br>
+                <input type="radio" id="Romans" name="book" value="Romans">
+                <label for="Romans">Romans</label><br>
+                <input type="radio" id="1_Corinthians" name="book" value="1_Corinthians">
+                <label for="1_Corinthians">1 Corinthians</label><br>
+                <input type="radio" id="2_Corinthians" name="book" value="2_Corinthians">
+                <label for="2_Corinthians">2 Corinthians</label><br>
+                <input type="radio" id="Galatians" name="book" value="Galatians">
+                <label for="Galatians">Galatians</label><br>
+                <input type="radio" id="Ephesians" name="book" value="Ephesians">
+                <label for="Ephesians">Ephesians</label><br>
+                <input type="radio" id="Philippians" name="book" value="Philippians">
+                <label for="Philippians">Philippians</label><br>
+                <input type="radio" id="Colossians" name="book" value="Colossians">
+                <label for="Colossians">Colossians</label><br>
+                <input type="radio" id="1_Thessalonians" name="book" value="1_Thessalonians">
+                <label for="1_Thessalonians">1 Thessalonians</label><br>
+                <input type="radio" id="2_Thessalonians" name="book" value="2_Thessalonians">
+                <label for="2_Thessalonians">2 Thessalonians</label><br>
+                <input type="radio" id="1_Timothy" name="book" value="1_Timothy">
+                <label for="1_Timothy">1 Timothy</label><br>
+                <input type="radio" id="2_Timothy" name="book" value="2_Timothy">
+                <label for="2_Timothy">2 Timothy</label><br>
+                <input type="radio" id="Titus" name="book" value="Titus">
+                <label for="Titus">Titus</label><br>
+                <input type="radio" id="Philemon" name="book" value="Philemon">
+                <label for="Philemon">Philemon</label><br>
+                <input type="radio" id="Hebrews" name="book" value="Hebrews">
+                <label for="Hebrews">Hebrews</label><br>
+                <input type="radio" id="James" name="book" value="James">
+                <label for="James">James</label><br>
+                <input type="radio" id="1_Peter" name="book" value="1_Peter">
+                <label for="1_Peter">1 Peter</label><br>
+                <input type="radio" id="2_Peter" name="book" value="2_Peter">
+                <label for="2_Peter">2 Peter</label><br>
+                <input type="radio" id="1_John" name="book" value="1_John">
+                <label for="1_John">1 John</label><br>
+                <input type="radio" id="2_John" name="book" value="2_John">
+                <label for="2_John">2 John</label><br>
+                <input type="radio" id="3_John" name="book" value="3_John">
+                <label for="3_John">3 John</label><br>
+                <input type="radio" id="Jude" name="book" value="Jude">
+                <label for="Jude">Jude</label><br>
+                <input type="radio" id="Revelation" name="book" value="Revelation">
+                <label for="Revelation">Revelation</label><br>
 
-          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>New Testament</b></p>
-          <p>Phillipians</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:50%">50%</div>
-          </div>
-          <p>1 Peter</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:100%">100%</div>
-          </div>
+                <hr>
+                <p><b>Chapter Number</b></p>
+                <input type="number" id="chptNum" name="number" min="1" max="150" required></input>
+                <br><br>
+                <hr>
+                <p><b>Verse Numbers</b></p>
+                <input style="width: 40%;" type="text" id="verseNums" required></input>
+                <label for "verseNums">e.g. "3" or "2-7"</label>
+                <br><br>
+                <input type="button" onclick="console.log('read'); isReading = true; loadPassage();" value="Read"></input>
+                <input type="button" onclick="console.log('memorize'); isReading = false;" value="Memorize"></input>
+                <br><br>
+            </div>
           <br>
           <br>
         </div>
@@ -124,7 +234,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <!-- Right Column -->
     <div class="w3-twothird">
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey"></i>Psalm 27</h2>
+        <h2 class="w3-text-grey w3-padding-16" id="chptTitle"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey"></i></h2>
 	  <div class="w3-container">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	  <p id="verse2"></p>
@@ -141,13 +251,52 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </div>
 
 <footer class="w3-container w3-blue-grey w3-center w3-margin-top">
-  <p>Find me on social media.</p>
+  <br>
+  <p>Created by Ben Garcia. Find me on social media:</p>
   <a href="https://www.facebook.com/ben.garcia.7/"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
   <a href="https://www.instagram.com/benryangarcia/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-  <a href="https://linkedin.com"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
   <a href="https://github.com/Benjamin-Ryan-Garcia"><i class="fa fa-github w3-hover-opacity"></i></a>
   <p></p>
 </footer>
+
+<script>
+//passage selection stuff
+var bookName = "Psalms"
+var chptNum = 1;
+var firstVerse = 0;
+var lastVerse = 0;
+var verseNums = [];
+var isReading = false;
+
+function loadPassage(){
+    $('#help').css("display", "none");
+    var bookNameEl = $("input[name='book']:checked");
+    bookName = bookNameEl.val();
+    var chptNumEl = $('#chptNum');
+    chptNum = chptNumEl.val();
+    var verseNumsEl = $('#verseNums');
+    var verseNumsString = verseNumsEl.val();
+    if(verseNumsString.indexOf("-") != -1){
+        firstVerse = verseNumsString.substring(0, verseNumsString.indexOf("-"));
+        lastVerse = verseNumsString.substring(verseNumsString.indexOf("-")+1);
+    }
+    else{
+        firstVerse = verseNumsString;
+        lastVerse = firstVerse;
+    }
+    for(var i = firstVerse; i <= lastVerse; i++){
+        verseNums.push(i);
+    }
+    console.log(bookName);
+    console.log(chptNum);
+    document.getElementById("chptTitle").innerHTML = ("<i class=\"fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey\"></i>" + bookName.replace("_", " ") + " " + chptNum);
+    if(bookName == "Genesis"){
+        chptNum -=2;
+    }
+    wikiCors();
+    waitForIt();
+}
+</script>
 
 <script>
     function createCORSRequest(method, url){
@@ -164,45 +313,118 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         return xhr;
     }
 
-    var request = createCORSRequest("get", "https://en.wikisource.org/w/api.php?action=parse&page=Bible_(King_James)/Psalms&section=27&format=json&origin=*");
-    if (request){
-        request.onload = function(){
-            console.log(request.responseText);
-        };
-        request.send();
+    var wikiParse = "";
+    var pause = true;
+
+    function wikiCors(){
+        var url = "https://en.wikisource.org/w/api.php?action=parse&page=Bible_(King_James)/" + bookName + "&section=" + chptNum + "&format=json&origin=*";
+        console.log(url);
+        var request = createCORSRequest("get", url);
+        if (request){
+            request.onload = function(){
+                wikiParse = "";
+                var pointerElement = $('#verse2');
+                pointerElement.html("");
+                verseIndex = 0;
+                wordIndex = 0;
+                wikiParse = request.responseText;
+                console.log(wikiParse);
+                pause = false;
+            };
+            request.send();
+        }
     }
-</script>	
-	
+</script>
+
 <script>
+    //initialize variables
     var wordCount = 0;
     var wordIndex = 0;
     var verseIndex = 0;
-    var passage = "The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid?+When the wicked, even mine enemies and my foes, came upon me to eat up my flesh, they stumbled and fell.+Though an host should encamp against me, my heart shall not fear: though war should rise against me, in this will I be confident.+One thing have I desired of the LORD, that will I seek after; that I may dwell in the house of the LORD all the days of my life, to behold the beauty of the LORD, and to enquire in his temple.+For in the time of trouble he shall hide me in his pavilion: in the secret of his tabernacle shall he hide me; he shall set me up upon a rock.+And now shall mine head be lifted up above mine enemies round about me: therefore will I offer in his tabernacle sacrifices of joy; I will sing, yea, I will sing praises unto the LORD.+Hear, O LORD, when I cry with my voice: have mercy also upon me, and answer me.+When thou saidst, Seek ye my face; my heart said unto thee, Thy face, LORD, will I seek.+Hide not thy face far from me; put not thy servant away in anger: thou hast been my help; leave me not, neither forsake me, O God of my salvation.+When my father and my mother forsake me, then the LORD will take me up.+Teach me thy way, O LORD, and lead me in a plain path, because of mine enemies.+Deliver me not over unto the will of mine enemies: for false witnesses are risen up against me, and such as breathe out cruelty.+I had fainted, unless I had believed to see the goodness of the LORD in the land of the living.+Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.";
-    //var url = 'https://raw.githubusercontent.com/pstephens/kingjames.bible/master/kjv-src/kjv-1769.txt';
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    var url = 'https://en.wikisource.org/wiki/Bible_(King_James)/Psalms';
+    var passage = "";
+    var words;
+    var verses;
+    var elements;
 
-    var verses = passage.split(':');
-    var words = verses.map(function(verse) {
-        return verse.split(" ");
-    });
 
-    var verseNum = 1;
-    var elements = words.map(function(verse){
-        var temp = verse.map(function(word){
-            return $('<span id="' + word + '">' + word + ' ' + '</span>');
-        });
-        temp[0] = $('<span id="' + verse[0] + '">' + verseNum + ') ' + verse[0] + ' ' + '</span>'); //adds verse number to start of line
-        temp[temp.length - 1] = $('<span id="' + verse[verse.length - 1] + '">' + verse[verse.length - 1] + '<br><br>' + '</span>'); //adds a newline after each verse
-        verseNum++;
-        return temp;
-    });
+    function cleanWikiParse(){
+        passage = "";
+        var i = 1;
+        for(i = 1; wikiParse.indexOf("<sup>" + (i+1)) != -1; i++) {
+            if(i < firstVerse || i > lastVerse) continue;
+            var tempVerse = wikiParse;
+            tempVerse = wikiParse.substring(tempVerse.indexOf("<sup>" + i) + 19 + (i.toString().length-1), tempVerse.indexOf("\\n</p><p><span style=\\\"color:#2E8B57;\\\" id=\\\"" + chptNum + ":" + (i+1) + "\\\"><sup>" + (i+1) + "</sup></span>"));
+            tempVerse = tempVerse.replace(/\\n/g, " ");
+            tempVerse = tempVerse.replace("<i>", "");
+            tempVerse = tempVerse.replace("</i>", "");
+            tempVerse = tempVerse.trim();
+            if(i != lastVerse)
+                passage += tempVerse + "+";
+            else{
+                passage += tempVerse;
+            }
+        }
+
+        if(!(i > lastVerse)){
+            var tempVerse = wikiParse;
+            tempVerse = wikiParse.substring(tempVerse.indexOf("<sup>" + i) + 19 + (i.toString().length-1));
+            tempVerse = tempVerse.replace(/\\n/g, " ");
+            console.log(tempVerse);
+            var lowIndex = tempVerse.indexOf("\\");
+            if(tempVerse.indexOf("<") < lowIndex)
+                lowIndex = tempVerse.indexOf("<");
+            tempVerse = tempVerse.substring(0, lowIndex);
+            tempVerse = tempVerse.trim();
+            passage += tempVerse;
+        }
+
+        console.log(passage);
+    }
+
+    function waitForIt(){
+
+        console.log("waiting");
+        if (pause) {
+            setTimeout(function(){waitForIt()},100);
+        } else {
+            pause = true;
+            cleanWikiParse();
+            verses = passage.split('+');
+            words = verses.map(function(verse) {
+                return verse.split(" ");
+            });
+
+            var verseNum = firstVerse;
+            elements = words.map(function(verse){
+                var temp = verse.map(function(word){
+                    return $('<span id="' + word + '">' + word + ' ' + '</span>');
+                });
+                temp[0] = $('<span id="' + verse[0] + '">' + verseNum + ') ' + verse[0] + ' ' + '</span>'); //adds verse number to start of line
+                temp[temp.length - 1] = $('<span id="' + verse[verse.length - 1] + '">' + verse[verse.length - 1] + '<br><br>' + '</span>'); //adds a newline after each verse
+                verseNum++;
+                return temp;
+            });
+
+            if(isReading){
+                for(var j = firstVerse; j <= lastVerse; j++){
+                    passage = passage.replace("+", "\n" + (parseInt(j)+1.0) + " ");
+                }
+                $('#verse2').append(firstVerse + " " + passage);
+            }
+        };
+    }
+
+    function isLetter(str) {
+        return str.length === 1 && str.match(/[a-z]/i);
+    }
 
     var pointerElement = $('#verse2');
-    var incorrectEl = $('<span style="color: red;">incorrect</span>');
+    var incorrectEl = $('<span style="color: red; id="incorrectEl">incorrect</span>');
     var incorrectStroke = 0;
     document.addEventListener('keydown', function(event) {
     	var key = String.fromCharCode(event.keyCode).toLowerCase();
+
+        if(!isLetter(key) || isReading) return;
 
         if(key == words[verseIndex][wordIndex].charAt(0).toLowerCase()){
             pointerElement.append(elements[verseIndex][wordIndex]);
@@ -215,10 +437,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         else{
             incorrectEl.remove();
             incorrectEl.fadeIn(0);
+            incorrectEl.css("opacity", "100");
             pointerElement.append(incorrectEl);
             incorrectEl.fadeOut(300);
             incorrectStroke++; console.log(incorrectStroke);
-
+            console.log(key);
+            console.log(words[verseIndex][wordIndex]);
+            console.log(words[verseIndex][wordIndex].charAt(0).toLowerCase());
         }
     });
 
