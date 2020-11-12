@@ -220,7 +220,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <label for "verseNums">e.g. "3" or "2-7"</label>
                 <br><br>
                 <input type="button" onclick="console.log('read'); isReading = true; loadPassage();" value="Read"></input>
-                <input type="button" onclick="console.log('memorize'); isReading = false;" value="Memorize"></input>
+                <input type="button" onclick="console.log('memorize'); isReading = false; loadPassage();" value="Memorize"></input>
                 <br><br>
             </div>
           <br>
@@ -427,6 +427,7 @@ function loadPassage(){
         if(!isLetter(key) || isReading) return;
 
         if(key == words[verseIndex][wordIndex].charAt(0).toLowerCase()){
+            incorrectStroke = 0;
             pointerElement.append(elements[verseIndex][wordIndex]);
             elements[verseIndex][wordIndex].hide();
             elements[verseIndex][wordIndex].fadeIn(300);
@@ -435,15 +436,24 @@ function loadPassage(){
             if(wordIndex >= words[verseIndex].length){ verseIndex++; wordIndex = 0; }
         }
         else{
-            incorrectEl.remove();
-            incorrectEl.fadeIn(0);
-            incorrectEl.css("opacity", "100");
-            pointerElement.append(incorrectEl);
-            incorrectEl.fadeOut(300);
-            incorrectStroke++; console.log(incorrectStroke);
-            console.log(key);
-            console.log(words[verseIndex][wordIndex]);
-            console.log(words[verseIndex][wordIndex].charAt(0).toLowerCase());
+            incorrectStroke++;
+            if(incorrectStroke == 3){
+                incorrectStroke = 0;
+                pointerElement.append(elements[verseIndex][wordIndex]);
+                elements[verseIndex][wordIndex].hide();
+                elements[verseIndex][wordIndex].fadeIn(300);
+                elements[verseIndex][wordIndex].css("color", "red");
+                wordIndex++;
+                wordCount++;
+                if(wordIndex >= words[verseIndex].length){ verseIndex++; wordIndex = 0; }
+            }
+            else{
+                incorrectEl.remove();
+                incorrectEl.fadeIn(0);
+                incorrectEl.css("opacity", "100");
+                pointerElement.append(incorrectEl);
+                incorrectEl.fadeOut(300);
+            }
         }
     });
 
