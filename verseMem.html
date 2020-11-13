@@ -72,6 +72,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-container">
           <h3 class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>Passage Selection</b></h3>
+          <label class="w3-half" for="ver">Version:</label>
+          <select id="ver" name="ver">
+            <option value="KJV">KJV</option>
+            <option value="ESV">ESV</option>
+          </select>
             <div class="w3-half">
                 <p><b>Old Testament</b></p>
                 <input type="radio" id="Genesis" name="book" value="Genesis">
@@ -209,11 +214,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <label for="Jude">Jude</label><br>
                 <input type="radio" id="Revelation" name="book" value="Revelation">
                 <label for="Revelation">Revelation</label><br>
-
                 <hr>
                 <p><b>Chapter Number</b></p>
                 <input type="number" id="chptNum" name="number" min="1" max="150" required></input>
-                <br><br>
+                <br>
                 <hr>
                 <p style="margin-bottom: 3px;"><b>Verse Numbers</b></p>
                 <label for "verseNums">e.g. "3" or "2-7" or leave blank for whole chapter</label>
@@ -263,6 +267,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 //passage selection stuff
 var bookName = "Psalms"
 var chptNum = 1;
+var ver = "KJV"
 var firstVerse = 0;
 var lastVerse = 0;
 var verseNums = [];
@@ -270,6 +275,9 @@ var isReading = false;
 
 function loadPassage(){
     $('#help').css("display", "none");
+    var verEl = $("#ver");
+    ver = verEl.val();
+    console.log(ver);
     var bookNameEl = $("input[name='book']:checked");
     bookName = bookNameEl.val();
     var chptNumEl = $('#chptNum');
@@ -278,11 +286,12 @@ function loadPassage(){
     var verseNumsString = verseNumsEl.val();
     if(verseNumsString == ""){
         firstVerse = 1;
-        lastVerse = 177;
+        lastVerse = 178;
     }
     else if(verseNumsString.indexOf("-") != -1){
         firstVerse = verseNumsString.substring(0, verseNumsString.indexOf("-"));
         lastVerse = verseNumsString.substring(verseNumsString.indexOf("-")+1);
+        if(ver == "ESV") lastVerse++;
     }
     else{
         firstVerse = verseNumsString;
@@ -313,7 +322,9 @@ function loadPassage(){
         } else {
             xhr = null;
         }
-        xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+
+        //esv api key
+        if(ver == "ESV") xhr.setRequestHeader("Authorization", "3edfd010e9199bd553aabdfc5c3ea53b807fe012");
         return xhr;
     }
 
@@ -321,7 +332,14 @@ function loadPassage(){
     var pause = true;
 
     function wikiCors(){
-        var url = "https://en.wikisource.org/w/api.php?action=parse&page=Bible_(King_James)/" + bookName + "&section=" + chptNum + "&format=json&origin=*";
+        var url = "";
+        if(ver == "KJV"){
+            url = "https://en.wikisource.org/w/api.php?action=parse&page=Bible_(King_James)/" + bookName + "&section=" + chptNum + "&format=json&origin=*";
+        }
+        else if(ver == "ESV"){
+            //key: 3edfd010e9199bd553aabdfc5c3ea53b807fe012
+            url = "https://api.esv.org/v3/passage/text/?q=" + bookName + "+" + chptNum + "&include-footnotes=false&include-footnote-body=false";
+        }
         console.log(url);
         var request = createCORSRequest("get", url);
         if (request){
@@ -356,12 +374,7 @@ function loadPassage(){
     var correctStrokes = 0;
     var complete = false;
 
-    function cleanWikiParse(){
-        passage = "";
-        incorrectStroke = 0;
-        incorrectStrokes = 0;
-        correctStrokes = 0;
-        complete = false;
+    function cleanWikiParseKJV(){
         var i = 1;
         for(i = 1; wikiParse.indexOf("<sup>" + (i+1)) != -1; i++) {
             if(i < firstVerse || i > lastVerse) continue;
@@ -394,14 +407,48 @@ function loadPassage(){
         console.log(passage);
     }
 
+    function cleanWikiParseESV(){
+        var temp = 0;
+        var temp2 = 0;
+        wikiParse = wikiParse.substring(wikiParse.indexOf("[1]"), wikiParse.indexOf("(ESV)"));
+        wikiParse = wikiParse.substring(wikiParse.indexOf("[" + firstVerse + "]"));
+        var nextVer = lastVerse + 1.0;
+        if(wikiParse.indexOf("[" + firstVerse + "]") != -1){
+            wikiParse = wikiParse.substring(0, wikiParse.indexOf("[" + lastVerse + "]"));
+        }
+		wikiParse = wikiParse.replaceAll(/\\n/g, "");
+		wikiParse = wikiParse.replaceAll(/\s\s+/g, ' ');
+		while(wikiParse.indexOf("\\u201") != -1){
+		    temp = wikiParse.indexOf("\\u201");
+		    wikiParse = wikiParse.substring(0, temp) + wikiParse.substring(temp+6);
+		}
+		while(wikiParse.indexOf("[") != -1){
+		    temp = wikiParse.indexOf("[");
+		    temp2 = wikiParse.indexOf("]");
+		    wikiParse = wikiParse.substring(0, temp) + "+" + wikiParse.substring(temp2+2);
+		}
+		wikiParse = wikiParse.replaceAll(" +", "+");
+		wikiParse = wikiParse.substring(1);
+		passage = wikiParse.trim();
+
+		console.log(passage);
+    }
+
     function waitForIt(){
 
         console.log("waiting");
         if (pause) {
+            //change this back to 100
             setTimeout(function(){waitForIt()},100);
         } else {
             pause = true;
-            cleanWikiParse();
+            passage = "";
+            incorrectStroke = 0;
+            incorrectStrokes = 0;
+            correctStrokes = 0;
+            complete = false;
+            if(ver == "KJV") cleanWikiParseKJV();
+            else if(ver == "ESV") cleanWikiParseESV();
             verses = passage.split('+');
             words = verses.map(function(verse) {
                 return verse.split(" ");
@@ -436,10 +483,12 @@ function loadPassage(){
 
     document.addEventListener('keydown', function(event) {
     	var key = String.fromCharCode(event.keyCode).toLowerCase();
+        var correctKey = words[verseIndex][wordIndex].charAt(0).toLowerCase();
+        if(!isLetter(correctKey)) correctKey = words[verseIndex][wordIndex].charAt(1).toLowerCase();
 
         if(!isLetter(key) || isReading || complete) return;
 
-        if(key == words[verseIndex][wordIndex].charAt(0).toLowerCase()){
+        if(key == correctKey){
             incorrectStroke = 0;
             correctStrokes+=3;
             pointerElement.append(elements[verseIndex][wordIndex]);
