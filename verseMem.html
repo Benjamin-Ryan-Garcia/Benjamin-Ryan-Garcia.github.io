@@ -437,7 +437,7 @@ function loadPassage(){
 
         if(key == words[verseIndex][wordIndex].charAt(0).toLowerCase()){
             incorrectStroke = 0;
-            correctStrokes++;
+            correctStrokes+=3;
             pointerElement.append(elements[verseIndex][wordIndex]);
             elements[verseIndex][wordIndex].hide();
             elements[verseIndex][wordIndex].fadeIn(300);
