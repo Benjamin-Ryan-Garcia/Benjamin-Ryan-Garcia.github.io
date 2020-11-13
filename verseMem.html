@@ -215,10 +215,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <input type="number" id="chptNum" name="number" min="1" max="150" required></input>
                 <br><br>
                 <hr>
-                <p><b>Verse Numbers</b></p>
-                <input style="width: 40%;" type="text" id="verseNums" required></input>
-                <label for "verseNums">e.g. "3" or "2-7"</label>
-                <br><br>
+                <p style="margin-bottom: 3px;"><b>Verse Numbers</b></p>
+                <label for "verseNums">e.g. "3" or "2-7" or leave blank for whole chapter</label>
+                <input style="width: 40%; display: block;" type="text" id="verseNums" required></input>
+                <br>
                 <input type="button" onclick="console.log('read'); isReading = true; loadPassage();" value="Read"></input>
                 <input type="button" onclick="console.log('memorize'); isReading = false; loadPassage();" value="Memorize"></input>
                 <br><br>
@@ -276,7 +276,11 @@ function loadPassage(){
     chptNum = chptNumEl.val();
     var verseNumsEl = $('#verseNums');
     var verseNumsString = verseNumsEl.val();
-    if(verseNumsString.indexOf("-") != -1){
+    if(verseNumsString == ""){
+        firstVerse = 1;
+        lastVerse = 177;
+    }
+    else if(verseNumsString.indexOf("-") != -1){
         firstVerse = verseNumsString.substring(0, verseNumsString.indexOf("-"));
         lastVerse = verseNumsString.substring(verseNumsString.indexOf("-")+1);
     }
