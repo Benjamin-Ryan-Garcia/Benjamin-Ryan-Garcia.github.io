@@ -457,17 +457,18 @@ function loadPassage(){
                 var temp = verse.map(function(word){
                     return $('<span id="' + word + '">' + word + ' ' + '</span>');
                 });
-                temp[0] = $('<span id="' + verse[0] + '">' + verseNum + ') ' + verse[0] + ' ' + '</span>'); //adds verse number to start of line
-                temp[temp.length - 1] = $('<span id="' + verse[verse.length - 1] + '">' + verse[verse.length - 1] + '<br><br>' + '</span>'); //adds a newline after each verse
+                temp[0] = $('<span id="' + verse[0] + '"><b>' + verseNum + ')</b> ' + verse[0] + ' ' + '</span>'); //adds verse number to start of line
+                temp[temp.length - 1] = $('<span id="' + verse[verse.length - 1] + '">' + verse[verse.length - 1] + '<br>' + '</span>'); //adds a newline after each verse
                 verseNum++;
                 return temp;
             });
 
             if(isReading){
                 for(var j = firstVerse; j <= lastVerse; j++){
-                    passage = passage.replace("+", "\n" + (parseInt(j)+1.0) + " ");
+                    for(var k = 0; k < words[j-1].length; k++){
+                        $('#verse2').append(elements[j-1][k]);
+                    }
                 }
-                $('#verse2').append(firstVerse + " " + passage);
             }
         };
     }
