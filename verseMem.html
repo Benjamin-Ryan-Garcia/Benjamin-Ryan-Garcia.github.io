@@ -448,7 +448,8 @@ function loadPassage(){
                 complete = true;
                 console.log(correctStrokes);
                 console.log(incorrectStrokes);
-                pointerElement.append($('<br><br><span style="color: blue;">Accuracy: ' + Number.parseFloat(((correctStrokes-incorrectStrokes) / correctStrokes) * 100).toPrecision(4) + '%</span>'));
+                var accuracy = Number.parseFloat(((correctStrokes-incorrectStrokes) / correctStrokes) * 100).toPrecision(4);
+                pointerElement.append($('<p class="w3-text-grey"><b>Accuracy:</b></p><div class="w3-light-grey w3-round-xlarge w3-small"><div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:' + accuracy + '%">' + accuracy + '%</div></div>'));
             }
         }
         else{
