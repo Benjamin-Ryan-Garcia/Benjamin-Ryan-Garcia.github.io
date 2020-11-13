@@ -346,9 +346,18 @@ function loadPassage(){
     var verses;
     var elements;
 
+    //stat variables
+    var incorrectStroke = 0;
+    var incorrectStrokes = 0;
+    var correctStrokes = 0;
+    var complete = false;
 
     function cleanWikiParse(){
         passage = "";
+        incorrectStroke = 0;
+        incorrectStrokes = 0;
+        correctStrokes = 0;
+        complete = false;
         var i = 1;
         for(i = 1; wikiParse.indexOf("<sup>" + (i+1)) != -1; i++) {
             if(i < firstVerse || i > lastVerse) continue;
@@ -420,25 +429,34 @@ function loadPassage(){
 
     var pointerElement = $('#verse2');
     var incorrectEl = $('<span style="color: red; id="incorrectEl">incorrect</span>');
-    var incorrectStroke = 0;
+
     document.addEventListener('keydown', function(event) {
     	var key = String.fromCharCode(event.keyCode).toLowerCase();
 
-        if(!isLetter(key) || isReading) return;
+        if(!isLetter(key) || isReading || complete) return;
 
         if(key == words[verseIndex][wordIndex].charAt(0).toLowerCase()){
             incorrectStroke = 0;
+            correctStrokes++;
             pointerElement.append(elements[verseIndex][wordIndex]);
             elements[verseIndex][wordIndex].hide();
             elements[verseIndex][wordIndex].fadeIn(300);
             wordIndex++;
             wordCount++;
-            if(wordIndex >= words[verseIndex].length){ verseIndex++; wordIndex = 0; }
+            if(wordIndex >= words[verseIndex].length){ verseIndex++; wordIndex = 0;}
+            if(verseIndex >= words.length){
+                complete = true;
+                console.log(correctStrokes);
+                console.log(incorrectStrokes);
+                pointerElement.append($('<br><br><span style="color: blue;">Accuracy: ' + Number.parseFloat(((correctStrokes-incorrectStrokes) / correctStrokes) * 100).toPrecision(4) + '%</span>'));
+            }
         }
         else{
             incorrectStroke++;
+            incorrectStrokes++;
             if(incorrectStroke == 3){
                 incorrectStroke = 0;
+                correctStrokes++;
                 pointerElement.append(elements[verseIndex][wordIndex]);
                 elements[verseIndex][wordIndex].hide();
                 elements[verseIndex][wordIndex].fadeIn(300);
