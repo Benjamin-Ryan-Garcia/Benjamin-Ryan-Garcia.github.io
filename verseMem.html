@@ -303,9 +303,6 @@ function loadPassage(){
     console.log(bookName);
     console.log(chptNum);
     document.getElementById("chptTitle").innerHTML = ("<i class=\"fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey\"></i>" + bookName.replace("_", " ") + " " + chptNum);
-    if(bookName == "Genesis"){
-        chptNum -=2;
-    }
     wikiCors();
     waitForIt();
 }
@@ -412,16 +409,17 @@ function loadPassage(){
         var temp2 = 0;
         wikiParse = wikiParse.substring(wikiParse.indexOf("[1]"), wikiParse.indexOf("(ESV)"));
         wikiParse = wikiParse.substring(wikiParse.indexOf("[" + firstVerse + "]"));
-        var nextVer = lastVerse + 1.0;
-        if(wikiParse.indexOf("[" + firstVerse + "]") != -1){
+        if(wikiParse.indexOf("[" + lastVerse + "]") != -1){
             wikiParse = wikiParse.substring(0, wikiParse.indexOf("[" + lastVerse + "]"));
         }
 		wikiParse = wikiParse.replaceAll(/\\n/g, "");
 		wikiParse = wikiParse.replaceAll(/\s\s+/g, ' ');
+
 		while(wikiParse.indexOf("\\u201") != -1){
 		    temp = wikiParse.indexOf("\\u201");
 		    wikiParse = wikiParse.substring(0, temp) + wikiParse.substring(temp+6);
 		}
+
 		while(wikiParse.indexOf("[") != -1){
 		    temp = wikiParse.indexOf("[");
 		    temp2 = wikiParse.indexOf("]");
