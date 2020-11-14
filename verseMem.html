@@ -335,7 +335,7 @@ function loadPassage(){
         }
         else if(ver == "ESV"){
             //key: 3edfd010e9199bd553aabdfc5c3ea53b807fe012
-            url = "https://api.esv.org/v3/passage/text/?q=" + bookName + "+" + chptNum + "&include-footnotes=false&include-footnote-body=false";
+            url = "https://api.esv.org/v3/passage/text/?q=" + bookName + "+" + chptNum + "&include-footnotes=false&include-footnote-body=false&include-headings=false";
         }
         console.log(url);
         var request = createCORSRequest("get", url);
