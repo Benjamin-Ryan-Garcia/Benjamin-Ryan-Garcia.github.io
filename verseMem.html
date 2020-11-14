@@ -63,7 +63,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       <div id="help" class="w3-white w3-text-grey w3-card-4">
         <div class="w3-container">
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>VerseMem</b></p>
-          <p>This is a program that helps with memorizing scripture. To use it, select a passage, hit memorize, then just start typing the first letter of each word in the given passage. For example, with Psalm 27, the correct keystroke sequence begins with 't', 'l', 'i', 'm', 'l' (corresponding to "The LORD is my light").</p><br>
+          <p>This is a program that helps with memorizing scripture. To use it, select a passage, hit memorize, then just start typing the first letter of each word in the given passage. For example, with John 3:16, the correct keystroke sequence begins with 'f', 'g', 's', 'l', 't', 'w' (corresponding to "For God so loved the world").</p><br>
         </div>
       </div>
     <br>
@@ -454,7 +454,7 @@ function loadPassage(){
             });
 
             if(isReading){
-                for(var j = 0; j < (lastVerse - firstVerse) + 1.0; j++){
+                for(var j = 0; j < words.length; j++){
                     for(var k = 0; k < words[j].length; k++){
                         $('#verse2').append(elements[j][k]);
                     }
@@ -473,38 +473,33 @@ function loadPassage(){
 
     document.addEventListener('keypress', function(event) {
     	var key = String.fromCharCode(event.keyCode).toLowerCase();
-    	if(key == " " || !doneLoading) return;
+    	if(key == " " || !doneLoading || complete || isReading) return;
         var correctKey = words[verseIndex][wordIndex].charAt(0).toLowerCase();
         //console.log(correctKey);
         //.log(key);
+
+        //deal with Russian, or quotes and symbols at beginning of verse
         var m = 1;
         while(!isLetter(correctKey) && ver != "bb-sbb-rusbt" && m < 10){ console.log("using next char"); correctKey = words[verseIndex][wordIndex].charAt(m).toLowerCase(); m++;}
-
-        if((!isLetter(key) && ver != "bb-sbb-rusbt") || isReading || complete){ console.log("user entered illegal character"); return; }
+        if((!isLetter(key) && ver != "bb-sbb-rusbt")){ console.log("user entered illegal character"); return; }
 
         if(key == correctKey){
+            if(incorrectStroke == 0) correctStrokes+=1;
             incorrectStroke = 0;
-            correctStrokes+=3;
+            correctStrokes+=1;
             pointerElement.append(elements[verseIndex][wordIndex]);
             elements[verseIndex][wordIndex].hide();
             elements[verseIndex][wordIndex].fadeIn(300);
             wordIndex++;
             wordCount++;
             if(wordIndex >= words[verseIndex].length){ verseIndex++; wordIndex = 0;}
-            if(verseIndex >= words.length){
-                complete = true;
-                console.log(correctStrokes);
-                console.log(incorrectStrokes);
-                var accuracy = Number.parseFloat(((correctStrokes-incorrectStrokes) / correctStrokes) * 100).toPrecision(4);
-                pointerElement.append($('<p class="w3-text-grey"><b>Accuracy:</b></p><div class="w3-light-grey w3-round-xlarge w3-small"><div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:' + accuracy + '%">' + accuracy + '%</div></div>'));
-            }
         }
         else{
             incorrectStroke++;
             incorrectStrokes++;
             if(incorrectStroke == 3){
                 incorrectStroke = 0;
-                correctStrokes++;
+                //correctStrokes++;
                 pointerElement.append(elements[verseIndex][wordIndex]);
                 elements[verseIndex][wordIndex].hide();
                 elements[verseIndex][wordIndex].fadeIn(300);
@@ -520,6 +515,14 @@ function loadPassage(){
                 pointerElement.append(incorrectEl);
                 incorrectEl.fadeOut(300);
             }
+        }
+        if(verseIndex >= words.length){
+            complete = true;
+            console.log(correctStrokes);
+            console.log(incorrectStrokes);
+            var accuracy = Number.parseFloat(((correctStrokes-incorrectStrokes) / correctStrokes) * 100).toPrecision(4);
+            if(correctStrokes == 0) accuracy = 0;
+            pointerElement.append($('<p class="w3-text-grey"><b>Accuracy:</b></p><div class="w3-light-grey w3-round-xlarge w3-small"><div class="w3-container w3-center w3-round-xlarge w3-blue-grey" style="width:' + accuracy + '%">' + accuracy + '%</div></div>'));
         }
     });
 
