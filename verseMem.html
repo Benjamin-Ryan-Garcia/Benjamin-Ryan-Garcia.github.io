@@ -384,7 +384,7 @@ function loadPassage(){
         if(wikiParse.indexOf(nxtVer) != -1){
             wikiParse = wikiParse.substring(0, wikiParse.indexOf(nxtVer));
         }
-		wikiParse = wikiParse.replaceAll(" \r\n", "+");
+		wikiParse = wikiParse.replaceAll("\r\n", "+");
 		wikiParse = wikiParse.replaceAll("\\\\u201.", "");
 		wikiParse = wikiParse.replace(/[0-9]/g, '');
 		wikiParse = wikiParse.substring(0, wikiParse.length-1);
