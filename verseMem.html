@@ -76,6 +76,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
           <select id="ver" name="ver">
             <option value="KJV">KJV</option>
             <option value="ESV">ESV</option>
+            <option value="DARBY">DARBY</option>
+            <option value="YLT">YLT</option>
+            <option value="RVA">RVA (ESP)</option>
+            <option value="bb-sbb-rusbt">RUSB (РУС)</option>
           </select>
             <div class="w3-half">
                 <p><b>Old Testament</b></p>
@@ -296,6 +300,7 @@ function loadPassage(){
     else{
         firstVerse = verseNumsString;
         lastVerse = firstVerse;
+        if(ver == "ESV") lastVerse++;
     }
     for(var i = firstVerse; i <= lastVerse; i++){
         verseNums.push(i);
@@ -330,12 +335,14 @@ function loadPassage(){
 
     function wikiCors(){
         var url = "";
-        if(ver == "KJV"){
-            url = "https://en.wikisource.org/w/api.php?action=parse&page=Bible_(King_James)/" + bookName + "&section=" + chptNum + "&format=json&origin=*";
-        }
-        else if(ver == "ESV"){
+        if(ver == "ESV"){
             //key: 3edfd010e9199bd553aabdfc5c3ea53b807fe012
             url = "https://api.esv.org/v3/passage/text/?q=" + bookName + "+" + chptNum + "&include-footnotes=false&include-footnote-body=false&include-headings=false";
+        }
+        else{
+            //url = "https://en.wikisource.org/w/api.php?action=parse&page=Bible_(King_James)/" + bookName + "&section=" + chptNum + "&format=json&origin=*";
+            //key: 5e35292ee138d5d6e3a45a55bf699271
+            url = "https://api.biblia.com/v1/bible/content/" + ver + ".txt.txt?passage=" + bookName + chptNum + "&style=oneVersePerLine&key=5e35292ee138d5d6e3a45a55bf699271";
         }
         console.log(url);
         var request = createCORSRequest("get", url);
@@ -371,37 +378,19 @@ function loadPassage(){
     var correctStrokes = 0;
     var complete = false;
 
-    function cleanWikiParseKJV(){
-        var i = 1;
-        for(i = 1; wikiParse.indexOf("<sup>" + (i+1)) != -1; i++) {
-            if(i < firstVerse || i > lastVerse) continue;
-            var tempVerse = wikiParse;
-            tempVerse = wikiParse.substring(tempVerse.indexOf("<sup>" + i) + 19 + (i.toString().length-1), tempVerse.indexOf("\\n</p><p><span style=\\\"color:#2E8B57;\\\" id=\\\"" + chptNum + ":" + (i+1) + "\\\"><sup>" + (i+1) + "</sup></span>"));
-            tempVerse = tempVerse.replace(/\\n/g, " ");
-            tempVerse = tempVerse.replace("<i>", "");
-            tempVerse = tempVerse.replace("</i>", "");
-            tempVerse = tempVerse.trim();
-            if(i != lastVerse)
-                passage += tempVerse + "+";
-            else{
-                passage += tempVerse;
-            }
+    function cleanWikiParseStandard(){
+        var nxtVer = lastVerse * 1.0 + 1.0;
+        wikiParse = wikiParse.substring(wikiParse.indexOf("\r\n" + firstVerse) + 3);
+        if(wikiParse.indexOf(nxtVer) != -1){
+            wikiParse = wikiParse.substring(0, wikiParse.indexOf(nxtVer));
         }
+		wikiParse = wikiParse.replaceAll(" \r\n", "+");
+		wikiParse = wikiParse.replaceAll("\\\\u201.", "");
+		wikiParse = wikiParse.replace(/[0-9]/g, '');
+		wikiParse = wikiParse.substring(0, wikiParse.length-1);
+		passage = wikiParse.trim();
 
-        if(!(i > lastVerse)){
-            var tempVerse = wikiParse;
-            tempVerse = wikiParse.substring(tempVerse.indexOf("<sup>" + i) + 19 + (i.toString().length-1));
-            tempVerse = tempVerse.replace(/\\n/g, " ");
-            console.log(tempVerse);
-            var lowIndex = tempVerse.indexOf("\\");
-            if(tempVerse.indexOf("<") < lowIndex)
-                lowIndex = tempVerse.indexOf("<");
-            tempVerse = tempVerse.substring(0, lowIndex);
-            tempVerse = tempVerse.trim();
-            passage += tempVerse;
-        }
-
-        console.log(passage);
+		console.log(passage);
     }
 
     function cleanWikiParseESV(){
@@ -445,8 +434,8 @@ function loadPassage(){
             incorrectStrokes = 0;
             correctStrokes = 0;
             complete = false;
-            if(ver == "KJV") cleanWikiParseKJV();
-            else if(ver == "ESV") cleanWikiParseESV();
+            if(ver == "ESV") cleanWikiParseESV();
+            else cleanWikiParseStandard();
             verses = passage.split('+');
             words = verses.map(function(verse) {
                 return verse.split(" ");
@@ -480,12 +469,15 @@ function loadPassage(){
     var pointerElement = $('#verse2');
     var incorrectEl = $('<span style="color: red; id="incorrectEl">incorrect</span>');
 
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keypress', function(event) {
     	var key = String.fromCharCode(event.keyCode).toLowerCase();
+    	if(key == " ") return;
         var correctKey = words[verseIndex][wordIndex].charAt(0).toLowerCase();
-        if(!isLetter(correctKey)) correctKey = words[verseIndex][wordIndex].charAt(1).toLowerCase();
+        console.log(correctKey);
+        console.log(key);
+        if(!isLetter(correctKey) && ver != "bb-sbb-rusbt"){ console.log("using 2nd char"); correctKey = words[verseIndex][wordIndex].charAt(1).toLowerCase(); }
 
-        if(!isLetter(key) || isReading || complete) return;
+        if((!isLetter(key) && ver != "bb-sbb-rusbt") || isReading || complete){ console.log("user entered illegal character"); return; }
 
         if(key == correctKey){
             incorrectStroke = 0;
