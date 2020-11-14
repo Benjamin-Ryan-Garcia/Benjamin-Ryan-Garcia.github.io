@@ -276,6 +276,7 @@ var firstVerse = 0;
 var lastVerse = 0;
 var verseNums = [];
 var isReading = false;
+var doneLoading = false;
 
 function loadPassage(){
     $('#help').css("display", "none");
@@ -379,12 +380,13 @@ function loadPassage(){
     var complete = false;
 
     function cleanWikiParseStandard(){
-        var nxtVer = lastVerse * 1.0 + 1.0;
+        var nxtVer = lastVerse * 1.0 + 1.0; //LOL I love js typecasting
         wikiParse = wikiParse.substring(wikiParse.indexOf("\r\n" + firstVerse) + 3);
         if(wikiParse.indexOf(nxtVer) != -1){
             wikiParse = wikiParse.substring(0, wikiParse.indexOf(nxtVer));
         }
 		wikiParse = wikiParse.replaceAll("\r\n", "+");
+		wikiParse = wikiParse.replaceAll(" +", "+");
 		wikiParse = wikiParse.replaceAll("\\\\u201.", "");
 		wikiParse = wikiParse.replace(/[0-9]/g, '');
 		wikiParse = wikiParse.substring(0, wikiParse.length-1);
@@ -425,8 +427,7 @@ function loadPassage(){
 
         console.log("waiting");
         if (pause) {
-            //change this back to 100
-            setTimeout(function(){waitForIt()},100);
+            setTimeout(function(){waitForIt()},100); //change this back to 100 after testing
         } else {
             pause = true;
             passage = "";
@@ -453,12 +454,13 @@ function loadPassage(){
             });
 
             if(isReading){
-                for(var j = firstVerse; j <= lastVerse; j++){
-                    for(var k = 0; k < words[j-1].length; k++){
-                        $('#verse2').append(elements[j-1][k]);
+                for(var j = 0; j < firstVerse; j++){
+                    for(var k = 0; k < words[j].length; k++){
+                        $('#verse2').append(elements[j][k]);
                     }
                 }
             }
+            doneLoading = true;
         };
     }
 
@@ -471,11 +473,12 @@ function loadPassage(){
 
     document.addEventListener('keypress', function(event) {
     	var key = String.fromCharCode(event.keyCode).toLowerCase();
-    	if(key == " ") return;
+    	if(key == " " || !doneLoading) return;
         var correctKey = words[verseIndex][wordIndex].charAt(0).toLowerCase();
-        console.log(correctKey);
-        console.log(key);
-        if(!isLetter(correctKey) && ver != "bb-sbb-rusbt"){ console.log("using 2nd char"); correctKey = words[verseIndex][wordIndex].charAt(1).toLowerCase(); }
+        //console.log(correctKey);
+        //.log(key);
+        var m = 1;
+        while(!isLetter(correctKey) && ver != "bb-sbb-rusbt" && m < 10){ console.log("using next char"); correctKey = words[verseIndex][wordIndex].charAt(m).toLowerCase(); m++;}
 
         if((!isLetter(key) && ver != "bb-sbb-rusbt") || isReading || complete){ console.log("user entered illegal character"); return; }
 
