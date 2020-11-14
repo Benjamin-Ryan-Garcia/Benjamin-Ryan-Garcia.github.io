@@ -454,7 +454,7 @@ function loadPassage(){
             });
 
             if(isReading){
-                for(var j = 0; j < firstVerse; j++){
+                for(var j = 0; j < (lastVerse - firstVerse) + 1.0; j++){
                     for(var k = 0; k < words[j].length; k++){
                         $('#verse2').append(elements[j][k]);
                     }
