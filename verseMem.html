@@ -484,7 +484,8 @@ function loadPassage(){
         if((!isLetter(key) && ver != "bb-sbb-rusbt")){ console.log("user entered illegal character"); return; }
 
         if(key == correctKey){
-            if(incorrectStroke == 0) correctStrokes+=1;
+            if(incorrectStroke == 0) correctStrokes+=2;
+            if(incorrectStroke == 1) correctStrokes+=1;
             incorrectStroke = 0;
             correctStrokes+=1;
             pointerElement.append(elements[verseIndex][wordIndex]);
@@ -499,7 +500,6 @@ function loadPassage(){
             incorrectStrokes++;
             if(incorrectStroke == 3){
                 incorrectStroke = 0;
-                //correctStrokes++;
                 pointerElement.append(elements[verseIndex][wordIndex]);
                 elements[verseIndex][wordIndex].hide();
                 elements[verseIndex][wordIndex].fadeIn(300);
