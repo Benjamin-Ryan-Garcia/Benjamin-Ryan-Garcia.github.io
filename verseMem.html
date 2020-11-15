@@ -51,6 +51,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 64.5%;
+}
 </style>
 
 <body class="w3-light-grey">
@@ -61,12 +66,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
   <!-- The Grid -->
   <div class="w3-row-padding">
-      <div id="help" class="w3-white w3-text-grey w3-card-4">
-        <div class="w3-container">
-          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>VerseMem</b></p>
-          <p>This is a program that helps with memorizing scripture. To use it, select a passage, hit memorize, then just start typing the first letter of each word in the given passage. For example, with John 3:16, the correct keystroke sequence begins with 'f', 'g', 's', 'l', 't', 'w' (corresponding to "For God so loved the world").</p><br>
-        </div>
+    <div id="help" class="w3-white w3-text-grey w3-card-4">
+      <div class="w3-container">
+        <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue-grey"></i>VerseMem</b></p>
+        <p>This is a program that helps with memorizing scripture. To use it, select a passage, hit memorize, then just start typing the first letter of each word in the given passage. For example, with John 3:16, the correct keystroke sequence begins with 'f', 'g', 's', 'l', 't', 'w' (corresponding to "For God so loved the world").</p><br>
       </div>
+    </div>
     <br>
     <!-- Left Column -->
     <div class="w3-third">
@@ -242,7 +247,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
     <!-- Right Column -->
     <div class="w3-twothird">
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
+      <div id="rightBox" class="w3-container w3-card w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16" id="chptTitle"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey"></i></h2>
 	  <div class="w3-container">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -267,7 +272,34 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <a href="https://github.com/Benjamin-Ryan-Garcia"><i class="fa fa-github w3-hover-opacity"></i></a>
   <p></p>
 </footer>
+<!--
+<script>
+/**From https://www.w3schools.com/howto/howto_js_sticky_header.asp**/
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {stickyFunction()};
 
+// Get the header
+var header = document.getElementById("rightBox");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+var unsticky = header.offSetHeight * 1.0 + sticky;
+console.log(header.offSetHeight + sticky);
+console.log(unsticky);
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function stickyFunction() {
+  if (window.pageYOffset > sticky) {
+    if(window.pageYOffset > unsticky){
+        header.classList.add("sticky");
+    }
+  }
+  else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
+-->
 <script>
 //passage selection stuff
 var bookName = "Psalms"
@@ -390,12 +422,13 @@ function loadPassage(){
         wikiParse = wikiParse.substring(wikiParse.indexOf("\r\n" + firstVerse) + 3);
         if(wikiParse.indexOf(nxtVer) != -1){
             wikiParse = wikiParse.substring(0, wikiParse.indexOf(nxtVer));
+            wikiParse = wikiParse.substring(0, wikiParse.length-1);
         }
 		wikiParse = wikiParse.replaceAll("\r\n", "+");
 		wikiParse = wikiParse.replaceAll(" +", "+");
 		wikiParse = wikiParse.replaceAll("\\\\u201.", "");
 		wikiParse = wikiParse.replace(/[0-9]/g, '');
-		wikiParse = wikiParse.substring(0, wikiParse.length-1);
+
 		passage = wikiParse.trim();
 
 		console.log(passage);
