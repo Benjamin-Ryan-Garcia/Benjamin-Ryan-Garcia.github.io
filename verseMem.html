@@ -54,7 +54,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 .sticky {
   position: fixed;
   top: 0;
-  width: 64.5%;
+  width: 59.7%;
 }
 </style>
 
@@ -131,8 +131,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <label for="Proverbs">Proverbs</label><br>
                 <input type="radio" id="Ecclesiastes" name="book" value="Ecclesiastes">
                 <label for="Ecclesiastes">Ecclesiastes</label><br>
-                <input type="radio" id="Song_Of_Solomon" name="book" value="Song_Of_Solomon">
-                <label for="Song_Of_Solomon">Song Of Solomon</label><br>
+                <input type="radio" id="Song_Of_Solomon" name="book" value="Song_of_Solomon">
+                <label for="Song_of_Solomon">Song of Solomon</label><br>
                 <input type="radio" id="Isaiah" name="book" value="Isaiah">
                 <label for="isaiah">Isaiah</label><br>
                 <input type="radio" id="Jeremiah" name="book" value="Jeremiah">
@@ -272,6 +272,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <a href="https://github.com/Benjamin-Ryan-Garcia"><i class="fa fa-github w3-hover-opacity"></i></a>
   <p></p>
 </footer>
+
 <!--
 <script>
 /**From https://www.w3schools.com/howto/howto_js_sticky_header.asp**/
@@ -290,9 +291,7 @@ console.log(unsticky);
 // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
 function stickyFunction() {
   if (window.pageYOffset > sticky) {
-    if(window.pageYOffset > unsticky){
-        header.classList.add("sticky");
-    }
+    header.classList.add("sticky");
   }
   else {
     header.classList.remove("sticky");
@@ -300,6 +299,7 @@ function stickyFunction() {
 }
 </script>
 -->
+
 <script>
 //passage selection stuff
 var bookName = "Psalms"
@@ -312,7 +312,7 @@ var isReading = false;
 var doneLoading = false;
 
 function loadPassage(){
-    //$('#help').css("display", "none");
+    $('#help').css("display", "none");
     var verEl = $("#ver");
     ver = verEl.val();
     console.log(ver);
@@ -339,10 +339,11 @@ function loadPassage(){
     for(var i = firstVerse; i <= lastVerse; i++){
         verseNums.push(i);
     }
+    document.getElementById("chptTitle").innerHTML = ("<i class=\"fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey\"></i>" + bookName.replaceAll("_", " ") + " " + chptNum);
     console.log(bookName);
     console.log(chptNum);
-    document.getElementById("chptTitle").innerHTML = ("<i class=\"fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey\"></i>" + bookName.replace("_", " ") + " " + chptNum);
-    if(ver == "ESV") bookName = bookName.replaceAll("_", "");
+    if(ver == "ESV"){ bookName = bookName.replaceAll("_", ""); }
+    else if(bookName == "Song_of_Solomon") { bookName = bookName.replaceAll("_", "%20"); }
     wikiCors();
     waitForIt();
 }
@@ -429,7 +430,6 @@ function loadPassage(){
 		wikiParse = wikiParse.replaceAll(" +", "+");
 		wikiParse = wikiParse.replaceAll("\\\\u201.", "");
 		wikiParse = wikiParse.replace(/[0-9]/g, '');
-
 		passage = wikiParse.trim();
 
 		console.log(passage);
@@ -505,7 +505,7 @@ function loadPassage(){
     }
 
     function isLetter(str) {
-        return str.length === 1 && str.match(/[a-z]/i);
+        return str.length === 1 && str.match(/[a-zа-я]/i);
     }
 
     var pointerElement = $('#verse2');
@@ -520,8 +520,8 @@ function loadPassage(){
 
         //deal with Russian, or quotes and symbols at beginning of verse
         var m = 1;
-        while(!isLetter(correctKey) && ver != "bb-sbb-rusbt" && m < 10){ console.log("using next char"); correctKey = words[verseIndex][wordIndex].charAt(m).toLowerCase(); m++;}
-        if((!isLetter(key) && ver != "bb-sbb-rusbt")){ console.log("user entered illegal character"); return; }
+        while(!isLetter(correctKey) && m < 10){ console.log("using next char"); correctKey = words[verseIndex][wordIndex].charAt(m).toLowerCase(); m++;}
+        if((!isLetter(key))){ console.log("user entered illegal character"); return; }
 
         if(key == correctKey){
             if(incorrectStroke == 0) correctStrokes+=2;
