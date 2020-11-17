@@ -342,6 +342,7 @@ function loadPassage(){
     console.log(bookName);
     console.log(chptNum);
     document.getElementById("chptTitle").innerHTML = ("<i class=\"fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey\"></i>" + bookName.replace("_", " ") + " " + chptNum);
+    if(ver == "ESV") bookName = bookName.replace("_", "");
     wikiCors();
     waitForIt();
 }
