@@ -339,11 +339,19 @@ function loadPassage(){
     for(var i = firstVerse; i <= lastVerse; i++){
         verseNums.push(i);
     }
+
     document.getElementById("chptTitle").innerHTML = ("<i class=\"fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-blue-grey\"></i>" + bookName.replaceAll("_", " ") + " " + chptNum);
+
     console.log(bookName);
     console.log(chptNum);
+
+    if(bookName == "Obadiah" || bookName == "Philemon" || bookName == "2_John" || bookName == "3_John" || bookName == "Jude"){
+        chptNum = verseNumsString;
+    }
+
     if(ver == "ESV"){ bookName = bookName.replaceAll("_", ""); }
     else if(bookName == "Song_of_Solomon") { bookName = bookName.replaceAll("_", "%20"); }
+
     wikiCors();
     waitForIt();
 }
