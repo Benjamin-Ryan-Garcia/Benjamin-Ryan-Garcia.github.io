@@ -12,7 +12,7 @@ def main():
               "Outputs decrypted text to file 'decrypted.txt'")
         print("--guess      takes in a txt file as input with no key. "
               "Will try to guess decryption based on frequency analysis. "
-              "Recommended input size of at least 5000 characters")
+              "Recommended input size of at least 2000 characters")
     elif sys.argv[1] == "--encrypt":
         with open(sys.argv[2], 'r') as file:
             myMessage = file.read()
