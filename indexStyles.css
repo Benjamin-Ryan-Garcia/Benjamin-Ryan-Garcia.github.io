@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=PT+Mono&display=swap');
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", sans-serif
+}
+
+
 .custom {
     display: flex;
 }
@@ -6,4 +20,38 @@
     .custom {
         flex-direction: column;
     }
+}
+
+.background-custom {
+    /* background-color: #ffffff; */
+    background-color: #c2cace;
+    /* background-color: #394044; */
+}
+
+.theme-color {
+    color: #3e4649;
+}
+
+.theme-bar {
+    background-color: #35434a;
+}
+
+.theme-second {
+    color: #c2cace;
+}
+
+.resume:link,
+.resume:visited {
+    background-color: #35434a;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.resume:hover,
+.resume:active {
+    background-color: #505557;
 }
