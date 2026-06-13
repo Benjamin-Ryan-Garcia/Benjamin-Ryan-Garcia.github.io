@@ -21,17 +21,29 @@ h6 {
     margin-top: 20px;
 }
 
-@media screen and (max-width: 800px) {
+.w3-tag {
+    margin-bottom: 10px;
+}
+
+.mobile-only {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
     .custom {
         flex-direction: column;
     }
 
+    .mobile-only {
+        display: block;
+    }
+
     .w3-tag {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     .portfolio-img {
-        width: 100%;
+        width: 70vw;
     }
 }
 
