@@ -16,9 +16,22 @@ h6 {
     display: flex;
 }
 
+.portfolio-img {
+    width: 33%;
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 800px) {
     .custom {
         flex-direction: column;
+    }
+
+    .w3-tag {
+        margin-bottom: 5px;
+    }
+
+    .portfolio-img {
+        width: 100%;
     }
 }
 
