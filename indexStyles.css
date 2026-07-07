@@ -11,6 +11,46 @@ h6 {
     font-family: "Montserrat", sans-serif
 }
 
+.background-custom {
+    /* background-color: #ffffff; */
+    /* background-color: #394044; */
+    background-color: #c2cace;
+    padding-inline: 1rem;
+
+}
+
+.page-container {
+    margin-top: 1rem;
+    margin-inline: auto;
+    max-width: 1400px;
+}
+
+.the-grid {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.left-column {
+    display: flex;
+    flex: 1;
+
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+.white-card {
+    background-color: #ffffff;
+    color: #3e4649;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
 .custom {
     display: flex;
@@ -29,9 +69,17 @@ h6 {
     display: none;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 850px) {
     .custom {
         flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .the-grid {
+        flex-direction: column;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     .mobile-only {
@@ -45,12 +93,6 @@ h6 {
     .portfolio-img {
         width: 70vw;
     }
-}
-
-.background-custom {
-    /* background-color: #ffffff; */
-    background-color: #c2cace;
-    /* background-color: #394044; */
 }
 
 .theme-color {
