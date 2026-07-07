@@ -11,6 +11,10 @@ h6 {
     font-family: "Montserrat", sans-serif
 }
 
+body {
+    background-color: #c2cace;
+}
+
 .background-custom {
     /* background-color: #ffffff; */
     /* background-color: #394044; */
