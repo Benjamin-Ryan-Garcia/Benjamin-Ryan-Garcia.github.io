@@ -73,6 +73,11 @@ body {
     display: none;
 }
 
+video {
+    width: 50%;
+    height: auto;
+}
+
 @media screen and (max-width: 850px) {
     .custom {
         flex-direction: column;
@@ -96,6 +101,11 @@ body {
 
     .portfolio-img {
         width: 70vw;
+    }
+
+    video {
+        width: 90%;
+        height: auto;
     }
 }
 
